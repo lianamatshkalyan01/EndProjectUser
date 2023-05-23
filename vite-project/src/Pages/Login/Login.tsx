@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../../feachers/usersSlice';
 import { Button, Checkbox, Form, Input } from 'antd';
+import { AppDispatch } from '../../app/store';
 
 
 interface User {
@@ -15,7 +16,7 @@ const Login: React.FC = () => {
     password: ''
   });
 
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   const onFinish = () => {
     dispatch(login(user));

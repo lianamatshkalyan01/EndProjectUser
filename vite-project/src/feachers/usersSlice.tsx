@@ -1,8 +1,15 @@
 import { createSlice, createAsyncThunk} from "@reduxjs/toolkit"
 
 interface User{
-    id:string;
-    name: string
+    email: string;
+    password: string;
+  }
+
+interface Users{
+    first_name:string;
+    last_name:string;
+    email:string;
+    password:string;
 }
 
 interface UsersState{
@@ -11,7 +18,7 @@ interface UsersState{
     error: string | null
 }
 const initialState: UsersState= {
-    status:'idle',
+    status:'test',
     users:[],
     error: null
 }
@@ -40,7 +47,7 @@ export const login = createAsyncThunk('users/login', async (user: User) => {
     }
   });
 
-export const register = createAsyncThunk('users/register', async(user: User)=>{
+export const register = createAsyncThunk('users/register', async(user: Users)=>{
     try{
         const res = await fetch("http://localhost:5000/user/register", {
             method: "POST",

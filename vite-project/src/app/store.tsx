@@ -1,8 +1,16 @@
 import {configureStore} from "@reduxjs/toolkit"
 import usersReducer from "../feachers/usersSlice"
+import productsReducer from "../feachers/productsSlice"
+import categoriesReducer from "../feachers/categoriesSlice"
+import undercategoriesReducer from "../feachers/undercategoriesSlice"
 
 export const store = configureStore({
     reducer:{
-        users: usersReducer
+        users: usersReducer,
+        products: productsReducer,
+        categories: categoriesReducer,
+        undercategories: undercategoriesReducer
     }
 })
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

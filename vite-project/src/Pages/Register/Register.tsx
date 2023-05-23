@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { register} from '../../feachers/usersSlice';
 import {Button, Form, Input} from 'antd';
+import { AppDispatch } from '../../app/store';
 
-interface User{
+interface Users{
     first_name:string;
     last_name:string;
     email:string;
@@ -23,14 +24,14 @@ const formItemLayout = {
 
 const App: React.FC = () => {
   const [form] = Form.useForm();
-  const[user, setUser] = useState<User>({
+  const[user, setUser] = useState<Users>({
     first_name:"",
     last_name:"",
     email:"",
     password:""
   })
 
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   const onFinish = () => {
     dispatch(register(user))
