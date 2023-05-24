@@ -34,6 +34,12 @@ export const fetchProducts = createAsyncThunk("products/fetchProducts", async()=
     return json
 })
 
+export const fetchProductsId = createAsyncThunk("products/fetchProductsId", async(id:number)=>{
+    const res = await fetch(`http://localhost:5000/prod/${id}`)
+    const json = res.json()
+    return json
+})
+
 const productsSlice = createSlice({
     name:"products",
     initialState,
@@ -49,6 +55,10 @@ const productsSlice = createSlice({
         })
         .addCase(fetchProducts.rejected, (state)=>{
             state.status = "error";
+        })
+        .addCase(fetchProductsId.fulfilled, (state, action:PayloadAction<Product>)=>{
+            state.status = 'success';
+            state.products = [action.payload]
         })
     }
 })

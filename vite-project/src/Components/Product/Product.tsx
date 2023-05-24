@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch} from '../../app/store';
 import { allProducts, fetchProducts } from '../../feachers/productsSlice';
+import {Link} from 'react-router-dom'
 
 interface Product {
   id:number;
@@ -30,13 +31,13 @@ const Product: React.FC = () => {
   return (
     <div>
       {data?.map((product) => (
-        <div key={product.id}>
+        <Link to={`/product/${product.id}`} key={product.id}>
           <div>{product.name}</div>
           <img
               src={`http://localhost:5000/${product?.img}`}
               alt="Sample photo"
             />
-        </div>
+        </Link>
       ))}
     </div>
   );

@@ -1,12 +1,14 @@
-import {createSlice, createAsyncThunk} from "@reduxjs/toolkit"
+import {createSlice, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit"
+import { RootState } from "../app/store";
 
 interface Category{
+    id:number;
     name: string;
     img: string;
 }
 
 interface CategoriesState{
-    status: string;
+    status: "test" | "loading" | "success" | "error"
     categories: Category[];
     error: string | null
 }
@@ -23,26 +25,36 @@ export const fetchCategories = createAsyncThunk("categories/fetchCategories", as
     return json
 })
 
+export const fetchCategoriesId = createAsyncThunk("categories/fetchCategoriesId", async(id:number)=>{
+    const res = await fetch(`http://localhost:5000/cat/${id}`)
+    const json = res.json()
+    return json
+})
+
 const categoriesSlice = createSlice({
     name:"categories",
     initialState,
     reducers:{},
     extraReducers : (builder)=>{
         builder
-        .addCase(fetchCategories.pending, (state, action)=>{
+        .addCase(fetchCategories.pending, (state)=>{
             state.status = "loading"
-            console.log(action)
         })
-        .addCase(fetchCategories.fulfilled, (state, {payload})=>{
+        .addCase(fetchCategories.fulfilled, (state, action: PayloadAction<Category[]>)=>{
             state.status = "success";
-            state.categories = payload
+            state.categories = action.payload
         })
-        .addCase(fetchCategories.rejected, (state, action)=>{
+        .addCase(fetchCategories.rejected, (state)=>{
             state.status = "error"
-            console.log(action)
+        })
+        .addCase(fetchCategoriesId.fulfilled, (state, action: PayloadAction<Category>)=>{
+            state.status = "success";
+            state.categories = [action.payload]
         })
     }
 })
 
 export default categoriesSlice.reducer
+export const allCategories = (state: RootState): Category[]=> state.categories.categories
+
 

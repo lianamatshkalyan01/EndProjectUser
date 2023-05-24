@@ -1,12 +1,14 @@
-import {createSlice, createAsyncThunk} from "@reduxjs/toolkit"
+import {createSlice, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit"
+import { RootState } from "../app/store";
 
 interface UnderCategory{
+    id:number;
     name: string;
-    underCategory_id:number;
+    category_id:number;
 }
 
 interface UnderCategoriesState{
-    status: string;
+    status: "test" | "loading" | "success" | "error";
     undercategories: UnderCategory[];
     error: string | null
 }
@@ -23,25 +25,35 @@ export const fetchUnderCategories = createAsyncThunk("undercategories/fetchUnder
     return json
 })
 
-const categoriesSlice = createSlice({
+export const fetchUnderCategoriesId = createAsyncThunk("undercategories/fetchUnderCategoriesId", async(id:number)=>{
+    const res = await fetch(`http://localhost:5000/under/${id}`)
+    const json = res.json()
+    return json
+})
+
+const UndercategoriesSlice = createSlice({
     name:"undercategories",
     initialState,
     reducers:{},
     extraReducers : (builder)=>{
         builder
-        .addCase(fetchUnderCategories.pending, (state, action)=>{
+        .addCase(fetchUnderCategories.pending, (state)=>{
             state.status = "loading"
-            console.log(action)
         })
-        .addCase(fetchUnderCategories.fulfilled, (state, {payload})=>{
+        .addCase(fetchUnderCategories.fulfilled, (state, action: PayloadAction<UnderCategory[]>)=>{
             state.status = "success";
-            state.undercategories = payload
+            state.undercategories = action.payload
         })
-        .addCase(fetchUnderCategories.rejected, (state, action)=>{
+        .addCase(fetchUnderCategories.rejected, (state)=>{
             state.status = "error"
-            console.log(action)
+        })
+        .addCase(fetchUnderCategoriesId.fulfilled, (state, action: PayloadAction<UnderCategory>)=>{
+            state.status = "success";
+            state.undercategories = [action.payload]
         })
     }
 })
 
-export default categoriesSlice.reducer
+export default UndercategoriesSlice.reducer
+export const allUnderCategories = (state:RootState) : UnderCategory[] => state.undercategories.undercategories
+
