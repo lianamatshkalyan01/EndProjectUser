@@ -5,6 +5,29 @@ interface Category{
     id:number;
     name: string;
     img: string;
+    UnderCategories: undercategories [];
+}
+
+interface undercategories{
+    id: number;
+    name: string;
+    category_id: number;
+    Products: products[]
+}
+
+interface products{
+    id:number;
+    name: string;
+    price: number;
+    type: string;
+    pack_quantity: number;
+    img: string;
+    dosage: string;
+    composition: string;
+    side_effect: string;
+    instruction: string;
+    storage_condition: string;
+    undercategories_id: number
 }
 
 interface CategoriesState{
@@ -50,6 +73,7 @@ const categoriesSlice = createSlice({
         .addCase(fetchCategoriesId.fulfilled, (state, action: PayloadAction<Category>)=>{
             state.status = "success";
             state.categories = [action.payload]
+            console.log(action.payload)
         })
     }
 })

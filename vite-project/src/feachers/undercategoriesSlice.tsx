@@ -2,15 +2,31 @@ import {createSlice, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit"
 import { RootState } from "../app/store";
 
 interface UnderCategory{
+    id:string;
+    name: string;
+    category_id:number; 
+    Products: products [];
+}
+
+interface products{
     id:number;
     name: string;
-    category_id:number;
+    price: number;
+    type: string;
+    pack_quantity: number;
+    img: string;
+    dosage: string;
+    composition: string;
+    side_effect: string;
+    instruction: string;
+    storage_condition: string;
+    undercategories_id: number
 }
 
 interface UnderCategoriesState{
     status: "test" | "loading" | "success" | "error";
     undercategories: UnderCategory[];
-    error: string | null
+    error: null
 }
 
 const initialState: UnderCategoriesState={
@@ -25,7 +41,7 @@ export const fetchUnderCategories = createAsyncThunk("undercategories/fetchUnder
     return json
 })
 
-export const fetchUnderCategoriesId = createAsyncThunk("undercategories/fetchUnderCategoriesId", async(id:number)=>{
+export const fetchUnderCategoriesId = createAsyncThunk("undercategories/fetchUnderCategoriesId", async(id:string)=>{
     const res = await fetch(`http://localhost:5000/under/${id}`)
     const json = res.json()
     return json
@@ -56,4 +72,3 @@ const UndercategoriesSlice = createSlice({
 
 export default UndercategoriesSlice.reducer
 export const allUnderCategories = (state:RootState) : UnderCategory[] => state.undercategories.undercategories
-

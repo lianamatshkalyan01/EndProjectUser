@@ -18,14 +18,15 @@ const Category: React.FC = () =>{
         dispatch(fetchCategories())
     }, [])
     console.log(data)
+    
 
     return(
         <div>
             {data?.map((category)=>(
-                <Link to={`/category/${category.id}`} key={category.id}>
+                <Link to={`/category/${category.id}/undercategory`} key={category.id}>
                     <div>{category.name}</div>
-                    <img src={`http://localhost:5000/${category?.img}`}
-                    alt="Sample photo" />
+                    {/* <img src={`http://localhost:5000/${category?.img}`}
+                    alt="Sample photo" /> */}
                 </Link>
             ))}
         </div>

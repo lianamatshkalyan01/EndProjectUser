@@ -1,48 +1,34 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch} from '../../app/store';
-import { allProducts, fetchProducts } from '../../feachers/productsSlice';
+import {useEffect} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
+import {useParams} from 'react-router-dom'
+import { allProducts, fetchProducts } from '../../feachers/productsSlice'
+import { AppDispatch } from '../../app/store'
 import {Link} from 'react-router-dom'
 
-interface Product {
-  id:number;
-  name: string;
-  price: number;
-  type: string;
-  pack_quantity: number;
-  img: string;
-  dosage: string;
-  composition: string;
-  side_effect: string;
-  instruction: string;
-  storage_condition: string;
-  undercategories_id: number;
-}
+const Product : React.FC = ()=>{
+  const data = useSelector(allProducts)
+  const dispatch: AppDispatch = useDispatch()
+  const {id} = useParams()
 
-const Product: React.FC = () => {
-    const data = useSelector(allProducts)
-    const dispatch: AppDispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(fetchProducts())
+  }, [])
+  console.log(data, "989898989898989898989898")
 
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
-  console.log(data)
-
+  const product = data.find((product)=> product.undercategories_id=== Number(id))
+  console.log(product, "65656565")
+    
   return (
     <div>
-      {data?.map((product) => (
-        <Link to={`/product/${product.id}`} key={product.id}>
+      {product && (
+        <Link to={`/${product.id}`}>
           <div>{product.name}</div>
-          <img
-              src={`http://localhost:5000/${product?.img}`}
-              alt="Sample photo"
-            />
         </Link>
-      ))}
+      )}
     </div>
-  );
-};
+  )
+}
 
-export default Product;
+export default Product
 
 
