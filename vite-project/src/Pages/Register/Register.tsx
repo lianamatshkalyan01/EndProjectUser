@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { register} from '../../feachers/usersSlice';
 import {Button, Form, Input} from 'antd';
 import { AppDispatch } from '../../app/store';
+import {useNavigate} from 'react-router-dom'
 
 interface Users{
     first_name:string;
@@ -23,6 +24,7 @@ const formItemLayout = {
 };
 
 const App: React.FC = () => {
+  const navigate = useNavigate()
   const [form] = Form.useForm();
   const[user, setUser] = useState<Users>({
     first_name:"",
@@ -138,7 +140,7 @@ const App: React.FC = () => {
         <Input.Password />
       </Form.Item>
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" onClick={()=>navigate('/login')}>
           Register
         </Button>
       </Form.Item>
