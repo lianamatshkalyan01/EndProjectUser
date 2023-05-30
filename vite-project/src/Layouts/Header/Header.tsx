@@ -3,14 +3,12 @@ import { SettingOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { Link } from "react-router-dom"
 import { decodeToken } from "react-jwt";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  const user = localStorage.getItem("user");
-  const decoded: any = user && decodeToken(JSON.parse(user)?.jwt);
-    console.log(decoded)
+  const token = localStorage.getItem("token");
+  const decoded: any = token ? decodeToken(token) : null;
   const [current, setCurrent] = useState('mail');
 
   const onClick: MenuProps['onClick'] = (e) => {
@@ -67,6 +65,7 @@ const Header: React.FC = () => {
     },
     {
         label: 'Cart',
+        onClick: () =>navigate(`/cartItem/${decoded.id}`),
         key: 'SubMenu5',
         icon: <SettingOutlined />,
       },
@@ -75,11 +74,9 @@ const Header: React.FC = () => {
   return (
     <div>
       <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
-      {decoded && (
-        <Link to={`/cartItem/${decoded.id}`}>Cart</Link>
-      )}
     </div>
   );
+  
 };
 
 export default Header;

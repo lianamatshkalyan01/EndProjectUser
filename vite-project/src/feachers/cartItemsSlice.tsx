@@ -57,7 +57,7 @@ export const createCart = createAsyncThunk('carts/createCart', async({product_id
 
 
 export const getCart = createAsyncThunk("carts/getCart", async(id?: string)=>{
-    const res = await fetch(`http://localhost:5000/items/cartitems/${id}`)
+    const res = await fetch(`http://localhost:5000/items/${id}`)
     const json =  await res.json()
     return json
 })

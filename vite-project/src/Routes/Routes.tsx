@@ -10,6 +10,7 @@ import ProductId from "../Components/Product/ProductId"
 import UnderCategoryId from "../Components/UnderCategory/UnderCategoryId"
 import Layout from "../Layouts/Layout"
 import User from "../Pages/User/User"
+import Cart from "../Components/Cart/Cart"
 // import UserCategory from "../Pages/User/UserCategory"
 // import UserProductId from "../Pages/User/UserProductsId"
 // import UserCategoryId from "../Pages/User/UserCategoryId"
@@ -35,6 +36,7 @@ function AppRoutes(){
             <Route path="/user/category/:id/undercategory" element={<UserCategoryId />} />
             <Route path="/user/undercategory/:id/product" element={<UserProduct />}/>
             <Route path="/user/undercategory" element={<UserUnderCategoryId />} /> */}
+            <Route path="/cartItem/:id" element={<Cart />} />
             </Route>
     </Routes>
     </div>
