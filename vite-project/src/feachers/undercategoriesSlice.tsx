@@ -41,7 +41,7 @@ export const fetchUnderCategories = createAsyncThunk("undercategories/fetchUnder
     return json
 })
 
-export const fetchUnderCategoriesId = createAsyncThunk("undercategories/fetchUnderCategoriesId", async(id:string)=>{
+export const fetchUnderCategoriesId = createAsyncThunk("undercategories/fetchUnderCategoriesId", async(id:number)=>{
     const res = await fetch(`http://localhost:5000/under/${id}`)
     const json = res.json()
     return json

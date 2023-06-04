@@ -20,6 +20,7 @@ function Cart(){
             {data?.map((cart)=>(
                 <div key={cart?.Product?.id}>
                     <h3>{cart?.Product?.name}</h3>
+                  
                 </div>
                 
             ))}

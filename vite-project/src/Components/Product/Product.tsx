@@ -5,6 +5,7 @@ import { allProducts, fetchProducts } from '../../feachers/productsSlice'
 import { AppDispatch } from '../../app/store'
 import {Link} from 'react-router-dom'
 
+
 const Product : React.FC = ()=>{
   const data = useSelector(allProducts)
   const dispatch: AppDispatch = useDispatch()
@@ -15,11 +16,12 @@ const Product : React.FC = ()=>{
   }, [])
   console.log(data, "989898989898989898989898")
 
-  const product = data.find((product)=> product.undercategories_id=== Number(id))
+  const product = data.find((products)=> products.undercategories_id=== Number(id))
   console.log(product, "65656565")
     
-  return (
+    return (
     <div>
+      
       {product && (
         <Link to={`/${product.id}`}>
           <div>{product.name}</div>

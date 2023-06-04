@@ -1,0 +1,57 @@
+.pic{
+    margin-left: 30%;
+    height: 35%;
+    width: 35%;
+}
+
+.type{  
+  gap: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 2%;
+} 
+.prod{
+display: flex;
+gap: 3%;
+margin-left: 2%;
+margin-bottom: 9%;
+margin-top: 5%;
+}
+
+.home{
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.cont{
+  height: 200px;
+  margin-top: 5%;
+  background-image: url(./home.png);
+  background-repeat: no-repeat;
+  margin-left: 35%;
+}
+
+.aboutpic{
+  width: 600px;
+  margin-left: 2%;
+  height: 400px;
+  margin-top: 5%;
+}
+
+h1{
+   text-align: center;
+}
+
+h2{
+   text-align: justify;
+}
+
+.about{
+  margin-top: 10%;
+  margin-right: 2%;
+}
+
+.about-container{
+  display: flex;
+  margin-bottom: 8%;
+}

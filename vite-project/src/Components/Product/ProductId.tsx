@@ -7,6 +7,7 @@ import { Button } from 'antd';
 import { createCart } from "../../feachers/cartItemsSlice";
 import {decodeToken} from 'react-jwt'
 
+
 const ProductId : React.FC = ()=>{
   const data = useSelector(allProducts)
   const dispatch: AppDispatch = useDispatch()
@@ -27,6 +28,7 @@ const ProductId : React.FC = ()=>{
 
   return(
     <div>
+      
       <div>{product?.name}</div>
       <div>{product?.price}</div>
       <img
@@ -34,11 +36,13 @@ const ProductId : React.FC = ()=>{
               alt="Sample photo"
             />
             <Button onClick={() => addToCart(product?.id)}>Add to Cart</Button>
+
     </div>
   )
 }
 
 export default ProductId
+
 
 
 

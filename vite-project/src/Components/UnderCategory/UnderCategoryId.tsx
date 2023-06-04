@@ -1,43 +1,46 @@
-import {useEffect} from 'react'
-import {useParams} from 'react-router-dom'
-import {useSelector, useDispatch} from 'react-redux'
-import { allUnderCategories } from '../../feachers/undercategoriesSlice'
-import { AppDispatch } from '../../app/store'
-import { fetchUnderCategories } from '../../feachers/undercategoriesSlice'
-import {Link} from 'react-router-dom'
- 
-const UnderCategoryId: React.FC = () =>{
-  const data = useSelector(allUnderCategories)
-  const dispatch:AppDispatch = useDispatch()
-  const {id} = useParams()
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { allUnderCategories, fetchUnderCategoriesId } from '../../feachers/undercategoriesSlice';
+import { AppDispatch } from '../../app/store';
+import { Link } from 'react-router-dom';
 
-  useEffect(()=>{
-    dispatch(fetchUnderCategories())
-  }, [])
-  console.log(data, "llllllllllllllllll")
+const UnderCategoryId: React.FC = () => {
+  const data = useSelector(allUnderCategories);
+  const dispatch: AppDispatch = useDispatch();
+  const { id } = useParams();
 
-console.log(id, "222222222222222222222222222222222")
-const undercategory = data.find((under) => under.category_id === Number(id));
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchUnderCategoriesId(parseInt(id)));
+    }
+  }, [dispatch, id]);
 
-console.log(undercategory, "ggggggggggggggg");
+  console.log(data, '7474747474')
 
+  const names = data.flatMap(underCategory => underCategory.Products);
 
-  const names = undercategory?.Products.map((prod): string=>{
-    return prod.name
-  })
+  console.log(names, "95195195211")
 
-  console.log(names, "kkkkkkkkkkkkkkkkkkk")
-
-  return(
+  return (
     <div>
-      {names?.map((prod, index)=>(
-        <Link to={`/${id}/product`} key={index}>
-          <div>{prod}</div>
-        </Link>
-      ))}
+      <div style={{ display: 'flex' }}>
+        {names.map((product, index) => (
+          <Link to={`/${product?.id}`} key={index} style={{ flex: 1, margin: '10px' }}>
+            <div style={{ width: '200px', height: '200px' }}>
+              <div>
+                <img src={`http://localhost:5000/${product?.img}`} alt={product.name} style={{ width: '100%', height: '150px' }} />
+              </div>
+              <div>{product.name}</div>
+              <div>{product.dosage}</div>
+              <div>{product.price}</div>
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
-    )
-}
+  );
+};
 
-export default UnderCategoryId
+export default UnderCategoryId;
 
