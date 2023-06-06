@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { register} from '../../feachers/usersSlice';
-import {Button, Form, Input} from 'antd';
+import {Button, Form, Input, Avatar} from 'antd';
 import { AppDispatch } from '../../app/store';
 import {useNavigate} from 'react-router-dom'
+import { UserOutlined } from '@ant-design/icons';
+import {Link} from "react-router-dom"
 
 interface Users{
     first_name:string;
@@ -23,7 +25,7 @@ const formItemLayout = {
   },
 };
 
-const App: React.FC = () => {
+const Register: React.FC = () => {
   const navigate = useNavigate()
   const [form] = Form.useForm();
   const[user, setUser] = useState<Users>({
@@ -36,7 +38,15 @@ const App: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const onFinish = () => {
-    dispatch(register(user))
+    form
+      .validateFields()
+      .then((values) => {
+        dispatch(register({user}));
+        navigate('/login');
+      })
+      .catch((errorInfo) => {
+        console.log(errorInfo)
+      });
   };
 
   const onFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
@@ -61,7 +71,12 @@ const App: React.FC = () => {
 
 
   return (
-    <Form
+    <div style={{height: '100vh',backgroundImage: 'url("https://img.freepik.com/free-vector/clean-medical-background_53876-97927.jpg")', backgroundRepeat:"no-repeat", backgroundSize:"cover" }}>
+      <div>
+      <Avatar style={{marginLeft:'50%', marginTop:"10%"}} size={64} icon={<UserOutlined />} />
+      </div>
+      <div style={{marginLeft:"28%", marginTop:"2%"}}>
+    <Form 
       {...formItemLayout}
       form={form}
       name="register"
@@ -72,14 +87,14 @@ const App: React.FC = () => {
       
     >
        <Form.Item
-        name="First Name"
+        name="first_name"
         label="First Name"
         rules={[{ required: true, message: 'Please input your First Name!' }]}
       >
         <Input onChange={onFirstNameChange}/>
       </Form.Item>
       <Form.Item
-        name="Last Name"
+        name="last_name"
         label="Last Name"
         rules={[{ required: true, message: 'Please input your Last Name!' }]}
       >
@@ -140,14 +155,19 @@ const App: React.FC = () => {
         <Input.Password />
       </Form.Item>
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit" onClick={()=>navigate('/login')}>
+      <Link to={'/login'}>
+       <p style={{ color:"black", fontSize:"16px"}}> Don't have an account? Sign Up </p>
+        </Link>
+        <Button type="primary" htmlType="submit" style={{marginLeft:"35%", marginTop:"5%"}}>
           Register
         </Button>
       </Form.Item>
     </Form>
+    </div>
+    </div>
   );
 };
 
-export default App;
+export default Register;
 
 

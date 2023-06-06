@@ -8,6 +8,7 @@ import UnderCategoryId from "../Components/UnderCategory/UnderCategoryId"
 import Layout from "../Layouts/Layout"
 import User from "../Pages/User/User"
 import Cart from "../Components/Cart/Cart"
+import About from "../Pages/About/About"
 
 
 function AppRoutes(){
@@ -23,6 +24,7 @@ function AppRoutes(){
             <Route path="/undercategory/:id/product" element={<UnderCategoryId/>}/>
             <Route path="/user" element={<User/>} />
             <Route path="/cartItem/:id" element={<Cart />} />
+            <Route path="/about" element={<About />} />
             </Route>
     </Routes>
     </div>

@@ -73,11 +73,13 @@ const ProductId: React.FC = () => {
     dispatch(fetchProductsId(Number(id)));
   }, [dispatch, id]);
 
-  function addToCart(productId: number | undefined) {
-    const token = localStorage.getItem("token");
-    if (token && productId) {
-      const decoded: any = token ? decodeToken(token) : null;
-      dispatch(createCart({ product_id: productId, user_id: decoded.id }));
+  function addToCart(id: number | undefined) {
+    if (id) {
+      const user = localStorage.getItem("user");
+      if (user) {
+        const decoded: any = decodeToken(JSON.parse(user)?.jwt);
+        dispatch(createCart({ product_id: id, user_id: decoded.id }));
+      }
     }
   }
 
@@ -96,7 +98,7 @@ const ProductId: React.FC = () => {
 
   return (
     <div>
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex"}}>
         <div>
           <img
             src={`http://localhost:5000/${product?.img}`}
@@ -112,7 +114,7 @@ const ProductId: React.FC = () => {
           <Button onClick={() => addToCart(product?.id)}>Add to Cart</Button>
         </div>
       </div>
-      <div>
+      <div style={{marginTop: "50px"}}>
         <Tabs
           type="editable-card"
           onChange={onChange}

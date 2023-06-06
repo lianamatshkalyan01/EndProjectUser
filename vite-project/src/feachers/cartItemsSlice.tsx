@@ -17,6 +17,7 @@ interface Product{
 }
 
 interface Cart{
+    id: number;
     name: string;
     price: number;
     Product: Product
@@ -55,6 +56,17 @@ export const createCart = createAsyncThunk('carts/createCart', async({product_id
     return json
 })
 
+export const deleteCartItem = createAsyncThunk("carts/deleteCartItems", async(id:number)=>{
+    const res = await fetch(`http://localhost:5000/items/delete/${id}`,{
+        method:"DELETE",
+        headers:{
+            "Content-type":"application/json; charset=UTF-8"
+        },
+    })
+    const json = res.json()
+    return json
+})
+
 
 export const getCart = createAsyncThunk("carts/getCart", async(id?: string)=>{
     const res = await fetch(`http://localhost:5000/items/${id}`)
@@ -69,10 +81,17 @@ const cartSlice = createSlice({
     extraReducers:(builder)=>{
         builder.addCase(createCart.fulfilled, (state, action)=>{
             state.status = 'success'
+            if(action.payload){
+                state.carts.push(action.payload)
+            }
             state.carts = action.payload
-        }).addCase(getCart.fulfilled, (state, action)=>{
+        }).addCase(getCart.fulfilled, (state, {payload})=>{
+            (state.status = 'success'), (state.carts = payload)
+        }).addCase(deleteCartItem.fulfilled,(state, {payload})=>{
             state.status = 'success'
-            state.carts = action.payload
+            if(payload.cartItem){
+                state.carts.push(payload.cartItem)
+            }
         })
     }
 })

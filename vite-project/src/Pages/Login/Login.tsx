@@ -4,6 +4,10 @@ import { login } from '../../feachers/usersSlice';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { AppDispatch } from '../../app/store';
 import {useNavigate} from 'react-router-dom'
+import { UserOutlined } from '@ant-design/icons';
+import { Avatar} from 'antd';
+import {Link} from "react-router-dom"
+
 
 interface User {
   email: string;
@@ -20,8 +24,8 @@ const Login: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const onFinish = () => {
-    dispatch(login(user));
-    navigate('/user'); // Navigate to the "user" page
+    dispatch(login({user}));
+    navigate('/user');
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -39,8 +43,11 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
-      <div style={{ width: 400 }}>
+    <div style={{height: '100vh',backgroundImage: 'url("https://img.freepik.com/free-vector/clean-medical-background_53876-97927.jpg")', backgroundRepeat:"no-repeat", backgroundSize:"cover" }}>
+    <div>
+    <Avatar style={{marginLeft:'50%', marginTop:"10%"}} size={64} icon={<UserOutlined />} />
+    </div>
+    <div style={{marginLeft:"28%", marginTop:"2%"}}>
         <Form
           name="basic"
           labelCol={{ span: 8 }}
@@ -67,17 +74,18 @@ const Login: React.FC = () => {
             <Input.Password onChange={onPasswordChange}/>
           </Form.Item>
 
-          <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
+          <Link to={'/register'}>
+       <p style={{marginLeft:"35%", color:"black", fontSize:"16px"}}> Don't have an account? Sign Up </p>
+        </Link>
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" style={{marginLeft:"35%", marginTop:"5%"}}>
               Login
             </Button>
           </Form.Item>
         </Form>
-      </div>
+        
+        </div>
     </div>
   );
 };

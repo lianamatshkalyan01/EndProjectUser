@@ -3,7 +3,7 @@ import usersReducer from "../feachers/usersSlice"
 import productsReducer from "../feachers/productsSlice"
 import categoriesReducer from "../feachers/categoriesSlice"
 import undercategoriesReducer from "../feachers/undercategoriesSlice"
-import cartsReducer from "../feachers/cartItemsSlice"
+import cartReducer from "../feachers/cartItemsSlice"
 
 export const store = configureStore({
     reducer:{
@@ -11,7 +11,7 @@ export const store = configureStore({
         products: productsReducer,
         categories: categoriesReducer,
         undercategories: undercategoriesReducer,
-        carts: cartsReducer
+        carts: cartReducer
     }
 })
 export type RootState = ReturnType<typeof store.getState>
