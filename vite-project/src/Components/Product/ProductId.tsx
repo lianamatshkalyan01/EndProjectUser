@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { allProducts, fetchProductsId } from '../../feachers/productsSlice';
@@ -6,16 +5,18 @@ import { AppDispatch } from '../../app/store';
 import { Button } from 'antd';
 import { createCart } from "../../feachers/cartItemsSlice";
 import { decodeToken } from 'react-jwt';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Tabs } from 'antd';
+import { Rate } from 'antd';
 
+const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
 
 const ProductId: React.FC = () => {
   const data = useSelector(allProducts);
   const dispatch: AppDispatch = useDispatch();
   const { id } = useParams();
-
+  const [value, setValue] = useState(3);
   const [activeKey, setActiveKey] = useState('1');
   const [items, setItems] = useState([
     { label: 'Composition', children: '', key: '1' },
@@ -97,8 +98,8 @@ const ProductId: React.FC = () => {
   }, [product]);
 
   return (
-    <div>
-      <div style={{ display: "flex"}}>
+    <div >
+      <div style={{ display: "flex" }}>
         <div>
           <img
             src={`http://localhost:5000/${product?.img}`}
@@ -106,15 +107,33 @@ const ProductId: React.FC = () => {
             alt="Sample photo"
           />
         </div>
-        <div>
-          <div>Name: {product?.name} {product?.dosage}</div>
-          <div>Type: {product?.type}</div>
-          <div>Quantity in the Pack: {product?.pack_quantity}</div>
-          <div>Price: {product?.price} AMD</div>
-          <Button onClick={() => addToCart(product?.id)}>Add to Cart</Button>
-        </div>
+        <div style={{marginTop:"7%", marginLeft:"2%"}}>
+          <div style={{fontSize:"25px", fontWeight:'bold'}}>Name: {product?.name} {product?.dosage}</div>
+          <br />
+          <span style={{fontSize:"20px"}}>
+          <Rate tooltips={desc} onChange={setValue} value={value} />
+          {value ? <span style={{fontSize:"20px"}}>{desc[value - 1]}</span> : ''}
+          </span>
+          <br />
+          <br />
+          <div style={{fontSize:"20px", fontWeight:'bold', color:'grey'}}>Type: {product?.type}</div>
+          <div style={{fontSize:"20px", fontWeight:'bold', color:'grey'}}>Quantity in the Pack: {product?.pack_quantity}</div>
+          <br />
+          <br />
+          <div style={{display:"flex"}}>
+          <Button shape="circle" style={{marginTop:"12px", fontWeight:"bold"}}>+</Button>
+          <p style={{marginLeft:"5%", marginRight:"5%", fontSize:"20px", fontWeight:"bold"}}>1</p>
+          <Button shape="circle" style={{marginTop:"12px", fontWeight:"bold"}}>-</Button>
+          </div>
+          </div>
+          <div style={{marginTop:"18%", marginLeft:"10%"}}>
+          <div style={{fontSize:"25px", fontWeight:"bold"}}>Price: {product?.price} AMD</div>
+          </div>
+          <div style={{marginTop:"18%", marginLeft:"5%"}}>
+          <Button type="primary" onClick={() => addToCart(product?.id)}>Add to Cart</Button>
+          </div>
       </div>
-      <div style={{marginTop: "50px"}}>
+      <div style={{marginTop: "50px", marginLeft:"30%"}}>
         <Tabs
           type="editable-card"
           onChange={onChange}
@@ -122,7 +141,7 @@ const ProductId: React.FC = () => {
           onEdit={onEdit}
         >
           {items.map(item => (
-            <Tabs.TabPane tab={item.label} key={item.key}>
+            <Tabs.TabPane tab={item.label} key={item.key} >
               {item.children}
             </Tabs.TabPane>
           ))}
