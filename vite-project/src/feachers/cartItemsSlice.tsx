@@ -13,13 +13,15 @@ interface Product{
     side_effect: string;
     instruction: string;
     storage_condition: string;
-    undercategories_id: number
+    undercategories_id: number;
 }
 
 interface Cart{
     id: number;
+    product_id: number;
     name: string;
     price: number;
+    quantity:number;
     Product: Product
 }
 
@@ -37,16 +39,17 @@ const initialState: CartState = {
 
 export interface Ids{
     product_id: number,
-    user_id: number
+    user_id: number,
+    quantity:number
 }
 
-export const createCart = createAsyncThunk('carts/createCart', async({product_id, user_id}:Ids)=>{
+export const createCart = createAsyncThunk('carts/createCart', async({product_id, user_id, quantity}:Ids)=>{
     const res = await fetch('http://localhost:5000/items/new',{
         method:'Post',
         body:JSON.stringify({
             product_id,
             user_id,
-            quantity:1
+            quantity
         }),
         headers:{
             "Content-type":"application/json; charset=UTF-8"
@@ -74,6 +77,34 @@ export const getCart = createAsyncThunk("carts/getCart", async(id?: string)=>{
     return json
 })
 
+export const incrementCartItem = createAsyncThunk('cartitems/incrementCartItem', async(id: number)=>{
+    const res = await fetch(`http://localhost:5000/items/increment/${id}`,{
+        method:"PUT",
+        body:JSON.stringify({
+            quantity:1
+        }),
+        headers:{
+            "Content-type":"application/json; charset=UTF-8"
+        },
+    })
+    const json = res.json()
+    return json
+})
+
+export const decrementCartItem = createAsyncThunk('cartitems/decrementCartItem', async(id:number)=>{
+    const res = await fetch(`http://localhost:5000/items/decrement/${id}`,{
+        method:"PUT",
+        body:JSON.stringify({
+            quantity:1
+        }),
+        headers:{
+            "Content-type":"application/json; charset=UTF-8"
+        },
+    })
+    const json = res.json()
+    return json
+})
+
 const cartSlice = createSlice({
     name:'carts',
     initialState,
@@ -91,6 +122,27 @@ const cartSlice = createSlice({
             state.status = 'success'
             if(payload.cartItem){
                 state.carts.push(payload.cartItem)
+            }
+        })
+        .addCase(incrementCartItem.fulfilled, (state, {payload})=>{
+            state.status = 'success'
+            const product_id = payload.cartItem.product_id
+            const cartItemIndex = state.carts.findIndex(
+                (item)=> item.Product.id === product_id
+            )
+            if(cartItemIndex !== -1){
+                state.carts[cartItemIndex].quantity +=1
+            }
+        }).addCase(decrementCartItem.fulfilled, (state, {payload})=>{
+            state.status = 'succes'
+            const cartItemId = payload.cartItem.product_id
+            const cartItemIndex = state.carts.findIndex(
+                (item)=> item.Product.id  === cartItemId
+            )
+            if(cartItemIndex !== -1){
+                if(state.carts[cartItemIndex].quantity > 1){
+                    state.carts[cartItemIndex].quantity -=1
+                }
             }
         })
     }

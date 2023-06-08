@@ -2,9 +2,12 @@ import {useEffect, useState} from "react"
 import {useParams} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import { AppDispatch } from "../../app/store"
-import { getCart, getCartItems, deleteCartItem } from "../../feachers/cartItemsSlice"
+import { getCart, getCartItems, deleteCartItem, incrementCartItem, decrementCartItem } from "../../feachers/cartItemsSlice"
 import {Button} from 'antd'
 import {DeleteOutlined} from '@ant-design/icons'
+import {Typography} from "antd"
+
+const { Text} = Typography;
 
 function Cart(){
     const data = useSelector(getCartItems) || [];
@@ -23,25 +26,55 @@ function Cart(){
         setIsdel(!del)
     }
 
+    function increment(id:number){
+        dispatch(incrementCartItem(id))
+    }
+
+    function decrement(id:number, quantity:number){
+            if(quantity <1){
+                deleteCartItem(id)
+            } else{
+                dispatch(decrementCartItem(id))
+            }
+    }
+
     return(
-        <div>
-            <h1>Cart</h1>
+        <div style={{backgroundColor:"#f8f8f8", marginLeft:"5%", marginRight:"5%"}}>
+            <h1 style={{fontFamily:"cursive", color:"rgba(230, 126, 34,1)", marginLeft:"40%", fontSize:"35px", marginBottom:"5%"}}>Shopping Cart</h1>
+            
             {data.length > 0 && data?.map((cart)=>(
                 <div key={cart?.Product?.id}>
+                    <div style={{display:"flex"}}>
+                    <Text italic style={{color:"rgba(243, 156, 18,1)", marginLeft:"10%", fontSize:"30px"}}> Image </Text>
+                    <Text italic style={{color:"rgba(243, 156, 18,1)", marginLeft:"15%", fontSize:"30px"}}> Product </Text>
+                    <Text italic style={{color:"rgba(243, 156, 18,1)", marginLeft:"15%", fontSize:"30px"}}> Quantity </Text>
+                    <Text italic style={{color:"rgba(243, 156, 18,1)", marginLeft:"12%", fontSize:"30px"}}> Price </Text>
+                    <Text italic style={{color:"rgba(243, 156, 18,1)", marginLeft:"12%", fontSize:"30px"}}> Option </Text>
+            </div>
                     <div style={{display:'flex'}}>
                     <div>
+                        
                     <img
             src={`http://localhost:5000/${cart?.Product?.img}`}
-            style={{ width: '350px', height: '400px' }}
+            style={{ width: '350px', height: '400px', marginLeft:"2%" }}
             alt="Sample photo"
           />
                     </div>
-                    <div style={{marginLeft:"20px", marginTop:'100px'}}> 
+                    <div style={{marginTop:'80px', marginLeft:"5%"}}>
                     <h2>Name: {cart?.Product?.name}</h2>
-                    <br />
-                    <h3>Price: {cart?.Product?.price} AMD</h3>
+                    <h3 style={{color:"grey"}}>Dosage: {cart?.Product?.dosage}</h3>
+                    <h3 style={{color:"grey"}}>Type: {cart?.Product?.type}</h3>
+                    <h3 style={{color:"grey"}}>Quantity in Pack: {cart?.Product?.pack_quantity}</h3>
+                    </div> 
+                    <div style={{display:'flex', marginTop:"10%", marginLeft:"12%"}}>
+                    <Button style={{marginTop:"10%"}} onClick={()=> decrement(cart?.product_id, cart?.quantity)}>-</Button>
+                    <h3 style={{marginLeft:"10%", marginRight:"10%"}}> {cart?.quantity}</h3>
+                    <Button  style={{marginTop:"10%"}} onClick={()=> increment(cart?.product_id)}>+</Button>
                     </div>
-                    <div>
+                    <div style={{marginTop:"9%", marginLeft:"12%"}}>
+                    <h3  style={{fontSize:"25px"}}>{cart?.quantity * cart?.Product?.price} AMD</h3>
+                    </div>
+                    <div style={{marginTop:"150px", marginLeft:"12%"}}>
                         <Button onClick={()=> deleteCart(cart?.Product.id)}>
                         <DeleteOutlined />
                         </Button>
@@ -54,3 +87,4 @@ function Cart(){
 }
 
 export default Cart
+

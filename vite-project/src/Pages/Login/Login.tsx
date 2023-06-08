@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../../feachers/usersSlice';
 import { Button, Checkbox, Form, Input } from 'antd';
@@ -25,6 +25,9 @@ const Login: React.FC = () => {
 
   const onFinish = () => {
     dispatch(login({user}));
+    setTimeout(() => {
+      window.location.reload();
+    }, 500); 
     navigate('/user');
   };
 

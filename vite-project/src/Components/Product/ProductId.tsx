@@ -18,6 +18,7 @@ const ProductId: React.FC = () => {
   const { id } = useParams();
   const [value, setValue] = useState(3);
   const [activeKey, setActiveKey] = useState('1');
+  const[count, setCount] = useState<number>(1)
   const [items, setItems] = useState([
     { label: 'Composition', children: '', key: '1' },
     { label: 'Side Effect', children: '', key: '2' },
@@ -79,7 +80,7 @@ const ProductId: React.FC = () => {
       const user = localStorage.getItem("user");
       if (user) {
         const decoded: any = decodeToken(JSON.parse(user)?.jwt);
-        dispatch(createCart({ product_id: id, user_id: decoded.id }));
+        dispatch(createCart({ product_id: id, user_id: decoded.id, quantity:count }));
       }
     }
   }
@@ -121,13 +122,27 @@ const ProductId: React.FC = () => {
           <br />
           <br />
           <div style={{display:"flex"}}>
-          <Button shape="circle" style={{marginTop:"12px", fontWeight:"bold"}}>+</Button>
-          <p style={{marginLeft:"5%", marginRight:"5%", fontSize:"20px", fontWeight:"bold"}}>1</p>
-          <Button shape="circle" style={{marginTop:"12px", fontWeight:"bold"}}>-</Button>
+          <Button shape="circle" style={{marginTop:"17px", fontWeight:"bold"}} 
+            onClick={()=>{
+              if(count <= 1){
+                setCount(1)
+              }else{
+                setCount(count-1)
+              }
+            }
+            }>-</Button>
+          <p style={{marginLeft:"5%", marginRight:"5%", fontSize:"23px", fontWeight:"bold"}}>{count}</p>
+          <Button shape="circle" style={{marginTop:"17px", fontWeight:"bolder"}}
+          onClick={()=>setCount(count+1)}
+          >+</Button>
           </div>
           </div>
-          <div style={{marginTop:"18%", marginLeft:"10%"}}>
-          <div style={{fontSize:"25px", fontWeight:"bold"}}>Price: {product?.price} AMD</div>
+          <div style={{marginTop:"17%", marginLeft:"10%"}}>
+            {product && (
+          <div style={{fontSize:"23px", fontWeight:"bold"}}>Price: {product?.price} AMD</div>)}
+          <br />
+          {product && (
+          <div style={{fontSize:"23px", fontWeight:"bold"}}>Total Price: {count * product?.price} AMD</div>)}
           </div>
           <div style={{marginTop:"18%", marginLeft:"5%"}}>
           <Button type="primary" onClick={() => addToCart(product?.id)}>Add to Cart</Button>
@@ -152,4 +167,3 @@ const ProductId: React.FC = () => {
 }
 
 export default ProductId;
-
