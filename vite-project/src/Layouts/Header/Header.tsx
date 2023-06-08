@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Menu, Input } from 'antd';
+import { Menu } from 'antd';
 import { useNavigate, Link } from 'react-router-dom';
 import { decodeToken } from 'react-jwt';
-import { UserOutlined, LoginOutlined, ShoppingCartOutlined, SearchOutlined, PhoneOutlined, HomeOutlined, LogoutOutlined } from '@ant-design/icons';
+import { UserOutlined, LoginOutlined, ShoppingCartOutlined, PhoneOutlined, HomeOutlined, LogoutOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 
 const items: MenuProps['items'] = [
@@ -23,7 +23,6 @@ const items: MenuProps['items'] = [
   },
 ];
 
-const { Search } = Input;
 
 const Header: React.FC = () => {
 const[user, setUser] = useState(localStorage.getItem('user') || null);
@@ -85,13 +84,6 @@ const[user, setUser] = useState(localStorage.getItem('user') || null);
             </Menu.Item>
           )}
         </Menu>
-      </div>
-      <div>
-        <Search
-          placeholder="Search..."
-          enterButton={<SearchOutlined />}
-          style={{ width: 900, marginLeft: '300px', marginTop: '15px', marginBottom: '20px' }}
-        />
       </div>
     </div>
   );

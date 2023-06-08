@@ -6,11 +6,20 @@ import { AppDispatch } from '../../app/store';
 import { Link } from 'react-router-dom';
 import { Checkbox } from 'antd';
 import {Button} from "antd"
+import { SearchOutlined} from '@ant-design/icons';
+import {Input} from "antd"
+
+const { Search } = Input;
 
 const UnderCategoryId: React.FC = () => {
   const data = useSelector(allUnderCategories);
   const dispatch: AppDispatch = useDispatch();
   const { id } = useParams();
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (value: string) => {
+    setSearchQuery(value);
+  };
 
   useEffect(() => {
     if (id) {
@@ -46,14 +55,24 @@ const UnderCategoryId: React.FC = () => {
     if(selectedTypes.length > 0 && !selectedTypes.includes(product.type)){
       return false
     }
-    return true
+    const productName = product.name.toLowerCase()
+    const query = searchQuery.toLowerCase()
+    return productName.includes(query)
   })
 
   console.log(filteredProducts, "95195195211")
 
 
   return (
-    <div style={{backgroundColor: "rgba(205, 209, 228, 1)", marginLeft:"10%", marginRight:"10%"}}>
+    <div style={{backgroundColor: "#EDEDED", marginLeft:"10%", marginRight:"10%"}}>
+      <div>
+        <Search
+          placeholder="Search..."
+          enterButton={<SearchOutlined />}
+          style={{ width: 900, marginLeft: '200px', marginTop: '15px', marginBottom: '20px' }}
+          onChange={(e)=> handleSearch(e.target.value)}
+        />
+      </div>
       <div style={{ display: 'flex' }}>
       <div style={{width:120}}>
         <div style={{backgroundColor:"white", borderRadius:"10px", marginLeft:"5px", marginTop:"5px"}}>

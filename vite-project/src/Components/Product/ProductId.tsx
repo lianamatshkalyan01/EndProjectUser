@@ -9,8 +9,10 @@ import { useRef, useState, useEffect } from 'react';
 import { Tabs } from 'antd';
 import { Rate } from 'antd';
 
+
 const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
+
 
 const ProductId: React.FC = () => {
   const data = useSelector(allProducts);

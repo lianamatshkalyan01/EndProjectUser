@@ -28,6 +28,7 @@ const initialState: ProductsState={
     error: null
 }
 
+
 export const fetchProducts = createAsyncThunk("products/fetchProducts", async()=>{
     const res = await fetch("http://localhost:5000/prod/products")
     const json = res.json()
