@@ -11,7 +11,8 @@ const contentStyle: React.CSSProperties = {
   width:'1200px',
   marginLeft:"10%",
   marginRight:"10%",
-  marginBottom:"2%"
+  marginBottom:"2%",
+  marginTop:"3%"
 };
 
 
