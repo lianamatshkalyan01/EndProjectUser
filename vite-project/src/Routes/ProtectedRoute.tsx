@@ -1,15 +1,24 @@
 import { Navigate } from 'react-router-dom';
-import { decodeToken } from "react-jwt";
+import { decodeToken } from 'react-jwt';
+import { ReactNode } from 'react';
+import {useState} from 'react'
 
-const ProtectedRouteUser: React.FC = ({ children }) => {
-  const token = localStorage.getItem('token');
-  const decodedToken: { role?: string } = decodeToken(token || "");
+const ProtectedRoute: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const user = localStorage.getItem('user') || null;
 
-  if (!token || decodedToken?.role === 'admin') {
+    const decoded: any = user && decodeToken(JSON.parse(user)?.jwt);
+    console.log(decoded.role, "useeeeeeerrrrr")
+
+  if (!decoded) {
     return <Navigate to="/" />;
   }
 
-  return <>{children}</>;
+  if (decoded?.role === 'admin') {
+    
+    return <>{children}</>;
+  } else {
+    return <Navigate to="/user" />;
+  }
 };
 
-export default ProtectedRouteUser;
+export default ProtectedRoute;

@@ -13,7 +13,7 @@ export const store = configureStore({
         categories: categoriesReducer,
         undercategories: undercategoriesReducer,
         carts: cartReducer,
-        order: orderReducer
+        order: orderReducer,
     }
 })
 export type RootState = ReturnType<typeof store.getState>

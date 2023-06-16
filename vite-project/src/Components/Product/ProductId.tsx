@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { allProducts, fetchProductsId } from '../../feachers/productsSlice';
 import { AppDispatch } from '../../app/store';
 import { Button } from 'antd';
@@ -8,7 +8,6 @@ import { decodeToken } from 'react-jwt';
 import { useRef, useState, useEffect } from 'react';
 import { Tabs } from 'antd';
 import { Rate } from 'antd';
-
 
 const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
@@ -21,6 +20,7 @@ const ProductId: React.FC = () => {
   const [value, setValue] = useState(3);
   const [activeKey, setActiveKey] = useState('1');
   const[count, setCount] = useState<number>(1)
+  const navigate = useNavigate()
   const [items, setItems] = useState([
     { label: 'Composition', children: '', key: '1' },
     { label: 'Side Effect', children: '', key: '2' },
@@ -83,6 +83,8 @@ const ProductId: React.FC = () => {
       if (user) {
         const decoded: any = decodeToken(JSON.parse(user)?.jwt);
         dispatch(createCart({ product_id: id, user_id: decoded.id, quantity:count }));
+      } else{
+        navigate('/login')
       }
     }
   }
