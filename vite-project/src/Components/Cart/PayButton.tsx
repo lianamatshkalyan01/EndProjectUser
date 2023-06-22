@@ -1,15 +1,18 @@
 import axios from "axios";
+import {Button} from "antd"
 
 export interface Order{
     cartItems: any[];
+    buttonStyle?: React.CSSProperties;
 }
-const PayButton = ({ cartItems}: Order)  => {
+const PayButton = ({ cartItems, buttonStyle}: Order)  => {
 
   const handleCheckout = () => {
     console.log(cartItems, "858888888888888888888888888")
     axios
       .post(`http://localhost:5000/order/new`, {
-        cartItems
+        cartItems,
+        buttonStyle
       })
       .then((response) => {
         if (response.data.url) {
@@ -21,7 +24,7 @@ const PayButton = ({ cartItems}: Order)  => {
 
   return (
     <>
-      <button onClick={() => handleCheckout()}>Check out</button>
+      <Button type="primary" style={buttonStyle} onClick={() => handleCheckout()}>Check out</Button>
     </>
   );
 };
@@ -33,33 +36,3 @@ export default PayButton
 
 
 
-
-
-//   fetch("http://localhost:5000/order/new", {
-//         method: "POST",
-//         body:JSON.stringify(order),
-//         headers:{
-//             "Content-Type": "application/json; charset=UTF-8",
-//         }
-//     })
-//     return res.json()
-// } catch(err){
-//     throw new Error("order");
-//   export const login = createAsyncThunk(
-//     "users/login",
-//     async ({ user }: { user: User }) => {
-//       try {
-//         const res = await fetch("http://localhost:5000/user/login", {
-//           method: "POST",
-//           body: JSON.stringify(user),
-//           headers: {
-//             "Content-Type": "application/json; charset=UTF-8",
-//           },
-//         });
-//         return res.json();
-//       } catch (err) {
-//         console.log(err);
-//         throw new Error("login failed");
-//       }
-//     }
-//   );

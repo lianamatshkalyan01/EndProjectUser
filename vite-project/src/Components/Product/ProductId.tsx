@@ -103,8 +103,8 @@ const ProductId: React.FC = () => {
   }, [product]);
 
   return (
-    <div >
-      <div style={{ display: "flex" }}>
+    <div style={{backgroundImage:'url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiKgRg2R15h4LDuHWmpvjMw1XMyS9SwQgLQw&usqp=CAU")', backgroundRepeat:"no-repeat", backgroundSize:"cover", height:"700px"}}>
+      <div style={{ display: "flex", marginLeft:"10%", marginRight:"10%" }}>
         <div>
           <img
             src={`http://localhost:5000/${product?.img}`}
@@ -152,7 +152,7 @@ const ProductId: React.FC = () => {
           <Button type="primary" onClick={() => addToCart(product?.id)}>Add to Cart</Button>
           </div>
       </div>
-      <div style={{marginTop: "50px", marginLeft:"30%"}}>
+      <div style={{marginTop: "50px", marginLeft:"10%", marginRight:"10%"}}>
         <Tabs
           type="editable-card"
           onChange={onChange}
@@ -161,7 +161,9 @@ const ProductId: React.FC = () => {
         >
           {items.map(item => (
             <Tabs.TabPane tab={item.label} key={item.key} >
+              <div style={{fontSize:"20px", fontWeight:"bold"}}>
               {item.children}
+              </div>
             </Tabs.TabPane>
           ))}
         </Tabs>

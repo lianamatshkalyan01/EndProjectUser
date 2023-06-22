@@ -1,7 +1,7 @@
 export default function Brands() {
     return (
       <div>
-        <div>
+        <div style={{backgroundImage:'url("https://previews.123rf.com/images/konstantinmaslak/konstantinmaslak1907/konstantinmaslak190700380/128150839-pills-and-capsules-on-white-background-medical-pharmacy-and-healthcare-concept-empty-place-for.jpg")', backgroundRepeat:"no-repeat", backgroundSize:"cover"}}>
           <h1>Brands</h1>
         </div>
         <div style={{ display: 'flex', marginLeft: '10%', marginRight: '10%', marginBottom:"5%"  }}>

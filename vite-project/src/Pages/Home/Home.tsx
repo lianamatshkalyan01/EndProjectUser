@@ -18,7 +18,7 @@ const contentStyle: React.CSSProperties = {
 
 export default function Home() {
   return (
-    <div>
+    <div style={{backgroundImage:'url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROKIGNIPcsnqSoyosxkbpDrjQijQ1csRwajg&usqp=CAU")', backgroundRepeat:"no-repeat", backgroundSize:"cover"}}>
     <Carousel autoplay>
     <div>
       <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkV8c9hPZXeD4mF1Lr_m8rjmn8BN4Oy5wKQg&usqp=CAU"}

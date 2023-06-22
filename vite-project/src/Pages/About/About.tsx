@@ -2,14 +2,14 @@ import React from 'react'
 
 export default function () {
   return (
-    <div style={{marginRight:"5%"}}>
+    <div style={{marginRight:"5%",height:"1100px", backgroundImage:'url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVC7wSbNMjI5LSYaEJM8UPpC5EcD5EwZhMgQ&usqp=CAU")', backgroundRepeat:'no-repeat',backgroundSize:"cover"}}>
         <div style={{display:"flex", marginLeft:"5%", marginRight:"2%"}}>
     <div>
         <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu6gxA1qIHkIGsKrXVYneeeDJckD2bD1N4bQ&usqp=CAU'
-        style={{width:"600px"}}
+        style={{width:"600px", marginTop:"7%"}}
         />
     </div>
-    <div style={{marginLeft:"5%", fontSize:"20px", marginTop:"5%"}}>
+    <div style={{marginLeft:"5%", fontSize:"20px", marginTop:"5%", textAlign: "justify"}}>
     Startinon and Development” (EBRD), and founders with many years of experience in the pharmaceutical market in the Republic of Armenia. Thanks to their professional and organizational skills the company provides high-quality services to the public.
 
 Ընկերության հիմնադիրներ են հանդիսանում հայաստանի դեղագործական ոլորտում բազմամյա փորձ ունեցող անձիք, որոնց մասնագիտական և կազմակերպչական ունակությունների շնորհիվ ընկերությունը բարձրորակ ծառայություններ է մատուցում հանրությանը, ինչպես նաև տարբեր ժամանակահատվածներում, որպես ընկերության բաժնետեր են հանդիսացել «Վերակառուցման և Զարգացման Եվրոպական Բանկը» (EBRD) և դեղագործական ոլորտի այլ խոշոր եվրոպական ներդրողներ:
@@ -18,7 +18,12 @@ Company has straight delivery from leading European and American manufacturers a
     </div>
     </div>
     <div style={{display:"flex", marginLeft:"5%"}}>
-    <div style={{fontSize:"20px", marginTop:"5%"}}>
+    <div>
+        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGSQQRX5s7AMiTPVOntlx7I1hT4STNcaQaS_zd37UCgiufULExi1uuQeFrW1NceYxs40w&usqp=CAU' 
+        style={{width:"600px", marginTop:"5%"}}
+        />
+    </div>
+    <div style={{fontSize:"20px", marginTop:"2%",marginLeft:"5%", textAlign: "justify", marginRight:"2%"}}>
     The modern logistics center of the company occupies an area of ​​3600 square meters, is equipped with state-of-the-art flow line equipment, which meets the strictest requirements for the storage, processing and release of medicines. The high bandwidth of the logistics center allows timely delivery of the range of goods sold by us to more than 1000 pharmacies and medical institutions.
 
 
@@ -29,18 +34,9 @@ Since 2018, the 24-hour delivery service of Alfa-Pharm has been operating, which
 
 Alfa Pharm chain of pharmacies consists of more than 170 pharmacies, thus being the largest geographically spread network in the country. The network pharmacies operate in Yerevan, Gyumri, Vanadzor, Stepanavan, Vayk, San, Martuni, Gavar, Abovyan, Hrazdan, Byureghavan, Charentsavan, Ashtarak, Armavir, Ararat, Kapan. in the area:
     </div>
-    <div>
-        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGSQQRX5s7AMiTPVOntlx7I1hT4STNcaQaS_zd37UCgiufULExi1uuQeFrW1NceYxs40w&usqp=CAU' 
-        style={{width:"600px", marginLeft:"5%", marginTop:"5%"}}
-        />
+    
     </div>
-    </div>
-    <div>
-        <img src='https://img.freepik.com/premium-vector/vector-illustration-with-red-line-cardio-medical-design-cardiogram-with-heart_783618-171.jpg' 
-        style={{width:"800px", marginLeft:"25%"}}
-       />
-    </div>
-    <div style={{fontSize:"20px"}}>
+    <div style={{fontSize:"20px", marginLeft:"5%", marginTop:"2%"}}>
     The staff of our company consists of more than 800 employees, including highly qualified pharmacists, logistics specialists, sales managers, management staff receiving continuous education at the company's training center. The goal of our daily work is to support the effective fight against various diseases, to help mothers feed their children properly, to offer high-quality cosmetics and optics.
     </div>
     </div>

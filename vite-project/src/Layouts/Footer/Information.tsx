@@ -52,15 +52,21 @@ const Information: React.FC = () => {
     console.log(key);
   };
 
-  return <Collapse defaultActiveKey={['1']} onChange={onChange}>
+  return (
+    <div style={{backgroundImage:'url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy0xrHTeMyePLS0RrfJoPOWIWHNo1O-KaT0A&usqp=CAU")', backgroundRepeat:"no-repeat", backgroundSize:"cover"}}>
+      <h1 style={{color:"orange", fontFamily:"cursive", textAlign:"center"}}> Frequently asked Question</h1>
+<div style={{marginLeft:"10%", marginRight:"10%", marginTop:"2%"}}>
+    <Collapse defaultActiveKey={['1']} onChange={onChange}> 
   {items.map(item => (
     <Collapse.Panel key={item.key} header={item.label}>
       {item.children}
     </Collapse.Panel>
   ))}
 </Collapse>;
-};
-
+</div>
+    </div>
+  )}
+  
     export default Information;
 
 

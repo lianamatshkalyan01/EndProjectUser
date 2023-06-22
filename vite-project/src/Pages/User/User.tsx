@@ -29,10 +29,10 @@ export default function User() {
 
 
   return (
-    <div >
+    <div style={{backgroundImage:'url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROKIGNIPcsnqSoyosxkbpDrjQijQ1csRwajg&usqp=CAU")', backgroundRepeat:"no-repeat", backgroundSize:"cover", height:"770px"}}>
       <div style={{display:'flex'}} >
       <div >
-        <div><h1>Seasonal Offers</h1></div>
+        <div><h1 style={{color:"orange", fontFamily:"cursive"}}>Seasonal Offers</h1></div>
         <div style={{display:'flex', marginLeft:"10%", width:"1000px", height:"270px", marginTop:"3%"}}>
           <div style={{border:"2px solid grey", borderRadius:'10px', marginRight:'2%'}}>
           <img
@@ -59,7 +59,7 @@ export default function User() {
             <p style={{fontSize:"20px", fontWeight:"bolder"}}>Nanoplast forte (7x9cm)</p>
             <div style={{display:"flex"}}>
             <p style={{ fontSize: "18px", marginBottom: "7%", marginRight: "10px" }}>1170 AMD</p>
-            <Text delete style={{ color: "red", fontSize: "18px", fontWeight: "bold", marginTop:"5%" }}>1230</Text>
+            <Text delete style={{ color: "red", fontSize: "18px", fontWeight: "bold", marginTop:"5%" }}>1230 AMD</Text>
             </div>
           </div>
           <div style={{border:"2px solid grey", borderRadius:'10px', marginRight:'2%'}}>
@@ -71,7 +71,7 @@ export default function User() {
             <p style={{fontSize:"20px", fontWeight:"bolder"}}>Dexamethasone (4mg/1ml)</p>
             <div style={{display:"flex"}}>
             <p style={{ fontSize: "18px",  marginBottom: "7%", marginRight: "10px" }}>670 AMD</p>
-            <Text delete style={{ color: "red", fontSize: "18px", fontWeight: "bold", marginTop:"5%" }}>710</Text>
+            <Text delete style={{ color: "red", fontSize: "18px", fontWeight: "bold", marginTop:"5%" }}>710 AMD</Text>
             </div >
           </div>
           <div style={{border:"2px solid grey", borderRadius:'10px', marginRight:'2%'}}>
@@ -83,7 +83,7 @@ export default function User() {
             <p style={{fontSize:"20px", fontWeight:"bolder"}}>Supra VIT vitamic C</p>
             <div style={{display:"flex"}}>
             <p style={{ fontSize: "18px", marginBottom: "7%", marginRight: "10px" }}>2450 AMD</p>
-            <Text delete style={{ color: "red", fontSize: "18px", fontWeight: "bold", marginTop:"5%" }}>2580</Text>
+            <Text delete style={{ color: "red", fontSize: "18px", fontWeight: "bold", marginTop:"5%" }}>2580 AMD</Text>
             </div>
           </div>
         </div>

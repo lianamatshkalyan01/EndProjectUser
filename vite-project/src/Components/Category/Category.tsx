@@ -21,13 +21,13 @@ const Category: React.FC = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', marginTop:'20px' }}>
-      <div style={{ fontSize: '30px', fontWeight:"bolder" }}>
+      <div style={{ fontSize: '30px', fontWeight:"bolder", fontFamily:"cursive", color:"orange"}}>
         Featured Categories
       </div>
       <div style={{ height: '200px', display: 'flex', marginLeft:"5%", marginTop:'20px', marginRight:"5%" }}>
         {data?.map((category) => (
           <Link to={`/category/${category.id}/undercategory`} key={category.id}>
-            <div style={{ margin: '5px', borderRadius: '10px', textAlign: 'center', backgroundColor: 'rgba(251, 192, 147,1)' }}>
+            <div style={{ margin: '5px', borderRadius: '10px', textAlign: 'center',boxShadow: '0px 7px 29px 0px rgba(100, 100, 111, 0.2)' }}>
             <img src={`http://localhost:5000/${category?.img}`} alt="Sample photo" 
                 style={{ height: "90%", width: "90%" }} />
               <div style={{ marginTop: '5px' }}>{category.name}</div>

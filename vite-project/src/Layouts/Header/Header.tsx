@@ -49,20 +49,20 @@ const[user, setUser] = useState(localStorage.getItem('user') || null);
   return (
     <div>
       <div style={{ display: 'flex',  height: '80px' }}>
-        <Menu mode="horizontal" selectedKeys={[current]} onClick={onClick}>
+        <Menu mode="horizontal" selectedKeys={[current]} onClick={onClick} style={{ boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)' }}>
           <Menu.Item key="items1" style={{ marginRight: '10px', fontSize: '20px', fontWeight: 'bolder' }}>
             <img
               src="https://seeklogo.com/images/P/pharmacy-logo-7092A6C9DF-seeklogo.com.png"
-              style={{ width: '100%', height: '80px' }}
+              style={{ width: '100%', height: '80px'}}
               alt="Example"
             />
           </Menu.Item>
           {user ? (
-            <Menu.Item key="items2" icon={<HomeOutlined style={{ color: 'orange', fontSize: '20px', fontWeight: 'bolder' }} />} style={{ marginRight: '10px', fontSize: '20px', fontWeight: 'bolder', marginTop: '20px' }}>
+            <Menu.Item key="items2" icon={<HomeOutlined style={{ color: 'orange', fontSize: '20px', fontWeight: 'bolder', marginLeft:"770px"}} />} style={{marginRight: '10px', fontSize: '20px', fontWeight: 'bolder', marginTop: '20px' }}>
             <Link to="/user">Home</Link>
           </Menu.Item>
           ):(
-            <Menu.Item key="items3" icon={<HomeOutlined style={{ color: 'orange', fontSize: '20px', fontWeight: 'bolder' }} />} style={{ marginRight: '10px', fontSize: '20px', fontWeight: 'bolder', marginTop: '20px' }}>
+            <Menu.Item key="items3" icon={<HomeOutlined style={{ color: 'orange', fontSize: '20px', fontWeight: 'bolder',marginLeft:"850px" }} />} style={{ marginRight: '10px', fontSize: '20px', fontWeight: 'bolder', marginTop: '20px' }}>
             <Link to="/">Home</Link>
           </Menu.Item>
           )}

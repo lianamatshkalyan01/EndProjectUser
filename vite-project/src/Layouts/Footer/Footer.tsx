@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Footer() {
   const navigate=useNavigate()
   return (
-    <div style={{ display:"flex", position: 'fixed', left: 0, bottom: 0, width: '100%', backgroundColor: 'white', padding: '7px'}}>
+    <div style={{ display:"flex", position: 'fixed', left: 0, bottom: 0, width: '100%', backgroundColor: 'white', padding: '7px', boxShadow:"0 0 5px grey"}}>
       <div>
         <div>
           <div>

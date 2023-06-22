@@ -28,17 +28,19 @@ const CategoryId: React.FC = () => {
         style={{
           width: "100%",
           height: "100%",
-          backgroundColor: "#dddddd",
+          backgroundImage:'url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS_vamF-186qhGd0WRSXaVth6gJnZGRsIhog&usqp=CAU")',
+          backgroundRepeat:"no-repeat",
+          backgroundSize:"cover",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           zIndex: 9999,
         }}
       >
-        <div style={{ border: "solid 2px", borderRadius: '10px', backgroundColor:"white", marginTop:"20px", marginBottom:'20px' }}>
+        <div style={{height:"550px", borderRadius: '10px', marginTop:"20px", marginBottom:'20px', marginLeft:"50%", boxShadow: '0px 7px 29px 0px rgba(100, 100, 111, 0.2)' }}>
           <ul style={{ margin: 0, padding: 0, display: "flex", flexDirection: "column", alignItems: "center" }}>
             {names?.map((undercategory, index) => (
-              <li key={index} style={{ listStyleType: 'none', textAlign: 'center', padding: '10px', margin: '10px' }}>
+              <li key={index} style={{ listStyleType: 'none', textAlign: 'center', padding: '10px', margin: '20px' }}>
                 <Link to={`/undercategory/${undercategory.id}/product`} style={{ textDecoration: 'none', fontSize: '25px' }}>
                   {undercategory.name}
                 </Link>
